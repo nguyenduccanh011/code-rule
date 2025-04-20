@@ -1,0 +1,154 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "app/_version.py"
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+# A regex preceded with ^/ will apply only to files and directories
+# in the root of the project.
+^/docs
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 100
+skip = ["docs", "migrations"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_optional = true
+
+[[tool.mypy.overrides]]
+module = [
+    "fastapi.*",
+    "pydantic.*",
+    "sqlalchemy.*",
+    "alembic.*",
+    "celery.*",
+    "redis.*",
+    "vnstock.*",
+    "yfinance.*",
+    "ta.*"
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "api: marks tests as API tests",
+    "unit: marks tests as unit tests"
+]
+
+[tool.coverage.run]
+source = ["app"]
+omit = [
+    "*/tests/*",
+    "*/migrations/*",
+    "*/__init__.py"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "pass",
+    "raise ImportError"
+]
+
+[tool.pylint.messages_control]
+disable = [
+    "C0111",
+    "C0103",
+    "C0303",
+    "C0330",
+    "C0326",
+    "W0511",
+    "R0903",
+    "R0913",
+    "R0914"
+]
+
+[tool.pylint.format]
+max-line-length = 100
+
+[tool.pylint.basic]
+good-names = ["i", "j", "k", "ex", "Run", "db", "id", "df"]
+
+[tool.pylint.similarities]
+min-similarity-lines = 4
+ignore-comments = true
+ignore-docstrings = true
+ignore-imports = true
+
+[tool.bandit]
+exclude_dirs = ["tests", "docs", "migrations"]
+skips = ["B101"]
+
+[tool.safety]
+full-report = true
+ignore = [
+    "51457",
+    "51668"
+]
+
+[tool.mkdocs]
+site_name = "Stock Analysis & Backtesting Platform"
+site_description = "Documentation for Stock Analysis & Backtesting Platform"
+site_author = "Your Name"
+site_url = "https://your-domain.com/docs"
+repo_url = "https://github.com/your-username/stock-platform"
+edit_uri = "edit/main/docs/"
+
+[tool.mkdocstrings]
+default_handler = "python"
+
+[tool.mkdocs-material]
+features = [
+    "navigation.tabs",
+    "navigation.sections"
+]
+
+[tool.mkdocs-redirects]
+redirect_maps = {
+    "index.md": "getting-started.md"
+}
+
+[tool.mkdocs-minify]
+minify_html = true
+minify_js = true
+minify_css = true
+
+[tool.mkdocs-swagger-ui-tag]
+url = "http://localhost:8000/openapi.json" 

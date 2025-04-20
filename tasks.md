@@ -1,161 +1,85 @@
-# Kế hoạch Triển khai Stock Platform
+# Danh sách công việc
+*Cập nhật lần cuối: 2024-04-20*
 
-*Cập nhật lần cuối: 2024-03-19*
+## Backend Tasks
 
-## 1. Thiết lập Cơ sở Hạ tầng
+### Setup & Configuration
+- [x] Tạo virtual environment và cài đặt dependencies
+- [x] Thiết lập cấu trúc project FastAPI
+- [x] Cấu hình logging và error handling
+- [x] Cấu hình CORS
 
-### 1.1 Thiết lập Môi trường Phát triển
-- [x] Cài đặt Python 3.11 và Node.js 18
-- [x] Cài đặt MySQL 8.0 và PHPMyAdmin
-- [x] Cấu hình môi trường ảo Python
-- [x] Cài đặt các thư viện cần thiết
+### API Endpoints
+- [x] Implement API lấy danh sách cổ phiếu
+- [x] Implement API lấy thông tin cơ bản cổ phiếu
+- [x] Implement API lấy dữ liệu giá
+- [x] Implement API lấy thông tin tài chính
+- [x] Implement API lấy thông tin sự kiện
+- [x] Implement API sàng lọc cổ phiếu
+- [x] Implement API phân tích kỹ thuật
+- [x] Implement API phân tích cơ bản
+- [x] Implement API theo dõi danh mục
+- [ ] Viết API documentation với Swagger/OpenAPI
+- [ ] Viết unit tests cho tất cả API endpoints
 
-### 1.2 Thiết lập Database
-- [x] Tạo database trong MySQL
-- [x] Tạo các bảng theo schema
-- [x] Tạo các index và view
-- [x] Tạo các stored procedures
-- [x] Import dữ liệu mẫu
+### Data Management
+- [ ] Thiết lập cấu trúc database
+- [ ] Implement models cho dữ liệu cổ phiếu
+- [ ] Implement caching cho dữ liệu thường xuyên truy cập
+- [ ] Implement background tasks để cập nhật dữ liệu
+- [ ] Implement data validation và cleaning
 
-## 2. Phát triển Backend
+## Frontend Tasks
 
-### 2.1 Core API
-- [x] Thiết lập FastAPI project
-- [x] Cấu hình SQLAlchemy với MySQL
-- [x] Implement authentication system
-- [x] Tạo các API endpoints cơ bản
+### Setup & Configuration
+- [ ] Khởi tạo project React với Vite và TypeScript
+- [ ] Cài đặt và cấu hình TailwindCSS
+- [ ] Thiết lập routing với React Router
+- [ ] Cấu hình state management (React Query)
+- [ ] Thiết lập HTTP client (Axios)
 
-### 2.2 Data Collection & Processing
-- [ ] Implement vnstock integration
-- [ ] Tạo service thu thập dữ liệu
-- [ ] Implement file-based caching
-- [ ] Tạo các job xử lý dữ liệu
+### Components & Pages
+- [ ] Tạo layout chung và navigation
+- [ ] Implement trang Danh sách Cổ phiếu
+- [ ] Implement trang Chi tiết Cổ phiếu
+- [ ] Implement trang Phân tích Kỹ thuật
+- [ ] Implement trang Phân tích Cơ bản
+- [ ] Implement trang Sàng lọc Cổ phiếu
+- [ ] Implement trang Theo dõi Danh mục
+- [ ] Implement các biểu đồ và visualizations
+- [ ] Viết unit tests cho components
 
-### 2.3 Analysis & Backtesting
-- [ ] Implement technical analysis functions
-- [ ] Tạo backtesting engine
-- [ ] Implement strategy optimization
-- [ ] Tạo reporting system
+### Features
+- [ ] Implement authentication và authorization
+- [ ] Implement search và filter cho cổ phiếu
+- [ ] Implement sorting cho danh sách
+- [ ] Implement pagination
+- [ ] Implement dark mode
+- [ ] Implement responsive design
+- [ ] Implement real-time updates
 
-## 3. Phát triển Frontend
+## DevOps Tasks
+- [ ] Thiết lập CI/CD pipeline
+- [ ] Cấu hình Docker cho development
+- [ ] Cấu hình Docker Compose cho local development
+- [ ] Tạo production deployment scripts
 
-### 3.1 Core UI
-- [ ] Thiết lập Next.js project
-- [ ] Cấu hình Material-UI
-- [ ] Implement authentication UI
-- [ ] Tạo layout chính
+## Documentation Tasks
+- [x] Viết README.md chi tiết
+- [ ] Tạo API documentation
+- [ ] Viết development guidelines
+- [ ] Tạo user documentation
 
-### 3.2 Stock Analysis Pages
-- [ ] Tạo trang phân tích cổ phiếu
-- [ ] Implement biểu đồ TradingView
-- [ ] Tạo trang xem dữ liệu tài chính
-- [ ] Implement các công cụ phân tích
+## Testing & QA
+- [ ] Viết end-to-end tests
+- [ ] Thực hiện performance testing
+- [ ] Thực hiện security testing
+- [ ] Code review và optimization
 
-### 3.3 Backtesting Interface
-- [ ] Tạo trang quản lý chiến lược
-- [ ] Implement backtesting form
-- [ ] Tạo trang kết quả backtest
-- [ ] Implement optimization interface
-
-### 3.4 Portfolio Management
-- [ ] Tạo trang quản lý danh mục
-- [ ] Implement theo dõi hiệu suất
-- [ ] Tạo trang phân tích rủi ro
-- [ ] Implement báo cáo hiệu suất
-
-## 4. Testing & Optimization
-
-### 4.1 Unit Testing
-- [ ] Viết test cho backend
-- [ ] Viết test cho frontend
-- [ ] Implement CI/CD pipeline
-- [ ] Tạo test coverage report
-
-### 4.2 Performance Optimization
-- [ ] Optimize database queries
-- [ ] Implement caching strategy
-- [ ] Optimize frontend performance
-- [ ] Load testing và stress testing
-
-## 5. Deployment & Maintenance
-
-### 5.1 Deployment
-- [ ] Cấu hình production environment
-- [ ] Setup monitoring và logging
-- [ ] Implement backup strategy
-- [ ] Deploy lên shared hosting
-
-### 5.2 Maintenance
-- [ ] Tạo documentation
-- [ ] Setup error tracking
-- [ ] Tạo maintenance plan
-- [ ] Implement update strategy
-
-## 6. Feature Enhancements
-
-### 6.1 Advanced Analysis
-- [ ] Implement machine learning models
-- [ ] Thêm các chỉ báo nâng cao
-- [ ] Tạo predictive analytics
-- [ ] Implement sentiment analysis
-
-### 6.2 Social Features
-- [ ] Tạo community features
-- [ ] Implement sharing system
-- [ ] Tạo discussion forums
-- [ ] Implement rating system
-
-### 6.3 Mobile App
-- [ ] Thiết kế mobile UI
-- [ ] Implement push notifications
-- [ ] Tạo offline mode
-- [ ] Optimize cho mobile
-
-## 7. Scaling & Enterprise Features
-
-### 7.1 Scaling
-- [ ] Implement database sharding
-- [ ] Setup load balancing
-- [ ] Optimize resource usage
-- [ ] Implement auto-scaling
-
-### 7.2 Enterprise Features
-- [ ] Implement multi-tenant support
-- [ ] Tạo admin dashboard
-- [ ] Implement role-based access
-- [ ] Tạo enterprise reporting
-
-## Notes & Priorities
-
-### High Priority
-- Thiết lập môi trường phát triển
-- Core API và authentication
-- Data collection và processing
-- Basic stock analysis
-- Portfolio management
-
-### Medium Priority
-- Advanced analysis features
-- Backtesting engine
-- Performance optimization
-- Documentation
-- Testing
-
-### Low Priority
-- Social features
-- Mobile app
-- Enterprise features
-- Advanced scaling
-
-## Tiến độ Hiện tại
-- Đã hoàn thành: Cơ sở hạ tầng, Core Setup
-- Đang thực hiện: API Development
-- Tiếp theo: 
-  1. Tạo file deps.py cho FastAPI Dependencies
-  2. Tạo API Endpoints
-  3. Cập nhật tasks.md với tiến độ mới
-
-## Ghi chú
-- Cần review lại các file đã tạo để đảm bảo tính nhất quán
-- Kiểm tra lại các dependency và version
-- Cập nhật documentation khi cần thiết 
+## Ideas / TODO Later
+- [ ] Tích hợp AI để phân tích và dự đoán
+- [ ] Thêm tính năng thông báo giá
+- [ ] Thêm tính năng backtest
+- [ ] Tích hợp với các nguồn dữ liệu khác
+- [ ] Thêm tính năng social trading
+- [ ] Thêm tính năng portfolio optimization 

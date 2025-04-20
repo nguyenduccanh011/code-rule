@@ -1,215 +1,163 @@
-# Tổng quan Dự án: Stock Analysis & Backtesting Platform
-*Cập nhật lần cuối: 2024-03-19*
+# Tổng quan Dự án: Vietnam Stock Platform
+*Cập nhật lần cuối: 2024-04-20*
 *AI LƯU Ý: Luôn tham khảo file này để hiểu bối cảnh tổng thể.*
 
 ## 1. Mục tiêu & Bối cảnh Kinh doanh
-*(Tại sao dự án tồn tại? Giải quyết vấn đề gì?)*
-
-### 1.1 Mục tiêu
-- Xây dựng nền tảng phân tích và backtest chiến lược đầu tư chứng khoán Việt Nam
-- Cung cấp công cụ phân tích kỹ thuật và cơ bản cho nhà đầu tư
-- Hỗ trợ backtest và tối ưu hóa chiến lược giao dịch
-- Tích hợp dữ liệu thời gian thực và lịch sử từ nhiều nguồn
-
-### 1.2 Giá trị mang lại
-- Giúp nhà đầu tư đánh giá hiệu quả chiến lược trước khi áp dụng thực tế
-- Cung cấp công cụ phân tích chuyên sâu, dễ sử dụng
-- Tối ưu hóa quyết định đầu tư dựa trên dữ liệu
-- Giảm thiểu rủi ro khi thử nghiệm chiến lược mới
+- Xây dựng nền tảng phân tích và theo dõi cổ phiếu Việt Nam
+- Cung cấp dữ liệu thị trường chứng khoán theo thời gian thực
+- Hỗ trợ nhà đầu tư đưa ra quyết định đầu tư thông minh
+- Tích hợp các công cụ phân tích kỹ thuật và cơ bản
 
 ## 2. Ngăn xếp Công nghệ (Tech Stack) - **QUAN TRỌNG**
+### Backend
+- Python 3.12
+- FastAPI 0.110.0
+- SQLAlchemy 2.0
+- PostgreSQL 16
+- vnstock (thư viện lấy dữ liệu chứng khoán)
+- Poetry (dependency management)
 
-### 2.1 Backend
-- **Ngôn ngữ**: Python 3.11
-- **Framework**: FastAPI
-- **Database**:
-  - MySQL 8.0 (dữ liệu quan hệ)
-  - File-based cache (thay vì Redis)
-- **ORM**: SQLAlchemy 2.0
-- **API Documentation**: Swagger/OpenAPI
-- **Authentication**: JWT + OAuth2
-
-### 2.2 Frontend
-- **Framework**: Next.js 14
-- **UI Library**: Material-UI (MUI)
-- **State Management**: Redux Toolkit
-- **Charting**: TradingView Lightweight Charts
-- **Data Visualization**: Plotly.js
-- **Form Handling**: React Hook Form
-- **Validation**: Zod
-
-### 2.3 Data Processing & Analysis
-- **Data Collection**: vnstock 3.2.0
-- **Data Processing**: pandas, numpy
-- **Technical Analysis**: ta-lib
-- **Machine Learning**: scikit-learn, tensorflow
-- **Backtesting**: backtrader
-- **Optimization**: optuna
-
-### 2.4 DevOps & Infrastructure
-- **Database Management**: PHPMyAdmin
-- **Version Control**: Git
-- **CI/CD**: GitHub Actions (tùy chọn)
-- **Logging**: File-based logging
-- **Cloud**: Shared hosting compatible
+### Frontend  
+- React 18
+- TypeScript 5
+- Vite
+- TailwindCSS
+- React Query
+- React Router
 
 ## 3. Kiến trúc Tổng thể & Patterns Chính
-
-### 3.1 Kiến trúc Monolithic
+- Clean Architecture
+- Repository Pattern
+- CQRS (Command Query Responsibility Segregation)
+```mermaid
+graph TD
+    A[Web UI] --> B[API Layer]
+    B --> C[Service Layer]
+    C --> D[Data Layer]
+    D --> E[External APIs]
+    D --> F[Database]
 ```
-┌─────────────────┐
-│  Frontend (Next.js)  │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Backend (FastAPI)  │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Database (MySQL)  │
-└─────────────────┘
-```
-
-### 3.2 Patterns Chính
-- **Repository Pattern**: Quản lý truy cập dữ liệu
-- **Factory Pattern**: Tạo đối tượng chiến lược
-- **Strategy Pattern**: Triển khai các chiến lược giao dịch
-- **Observer Pattern**: Theo dõi thay đổi thị trường
 
 ## 4. Cấu trúc Thư mục Dự án
 ```
-stock-platform/
-├── backend/
-│   ├── api/                 # API endpoints
-│   ├── core/               # Core business logic
-│   ├── models/             # Database models
-│   ├── services/           # Business services
-│   ├── strategies/         # Trading strategies
-│   └── utils/              # Utility functions
-├── frontend/
-│   ├── components/         # React components
-│   ├── pages/             # Next.js pages
-│   ├── store/             # Redux store
-│   ├── hooks/             # Custom hooks
-│   └── styles/            # CSS/SCSS
-├── data/
-│   ├── raw/               # Raw data
-│   ├── processed/         # Processed data
-│   └── cache/            # Cached data
-└── tests/                 # Test files
+vietnam-stock/
+├── backend/                      # Backend FastAPI application
+│   ├── app/                     # Application code
+│   │   ├── api/                # API endpoints
+│   │   │   ├── v1/            # API version 1
+│   │   │   └── v2/            # API version 2 (future)
+│   │   ├── core/               # Core functionality
+│   │   │   ├── config/        # Configuration
+│   │   │   ├── security/      # Authentication & Authorization
+│   │   │   └── utils/         # Utility functions
+│   │   ├── models/            # Database models
+│   │   ├── schemas/           # Pydantic schemas
+│   │   └── services/          # Business logic
+│   ├── tests/                  # Test files
+│   │   ├── unit/              # Unit tests
+│   │   ├── integration/       # Integration tests
+│   │   └── e2e/               # End-to-end tests
+│   ├── docs/                  # API documentation
+│   ├── scripts/               # Utility scripts
+│   ├── alembic/              # Database migrations
+│   └── docker/               # Docker configuration
+├── frontend/                    # React frontend application
+│   ├── src/                   # Source code
+│   │   ├── components/        # React components
+│   │   │   ├── common/       # Shared components
+│   │   │   ├── layout/       # Layout components
+│   │   │   └── features/     # Feature-specific components
+│   │   ├── pages/            # Page components
+│   │   ├── hooks/            # Custom hooks
+│   │   ├── services/         # API services
+│   │   ├── store/            # State management
+│   │   ├── types/            # TypeScript types
+│   │   └── utils/            # Utility functions
+│   ├── tests/                # Test files
+│   │   ├── unit/            # Unit tests
+│   │   ├── integration/     # Integration tests
+│   │   └── e2e/             # End-to-end tests
+│   └── public/              # Static assets
+├── docs/                       # Project documentation
+│   ├── api/                  # API documentation
+│   ├── architecture/         # Architecture docs
+│   ├── deployment/          # Deployment guides
+│   └── development/         # Development guides
+├── infrastructure/            # Infrastructure as Code
+│   ├── terraform/           # Terraform configurations
+│   └── kubernetes/          # Kubernetes configurations
+├── scripts/                   # Project-wide scripts
+│   ├── setup/               # Setup scripts
+│   ├── deployment/          # Deployment scripts
+│   └── maintenance/         # Maintenance scripts
+└── docker-compose.yml        # Docker Compose configuration
 ```
 
 ## 5. Domain Model / Khái niệm Cốt lõi
-
-### 5.1 Các Entity Chính
 ```mermaid
 erDiagram
-    User ||--o{ Strategy : creates
-    User ||--o{ Portfolio : manages
-    Strategy ||--o{ Backtest : runs
     Stock ||--o{ PriceData : has
     Stock ||--o{ FinancialData : has
-    Portfolio ||--o{ Position : contains
+    Stock ||--o{ Event : has
+    Stock ||--o{ Dividend : has
+    Stock ||--o{ Management : has
 ```
 
-### 5.2 Các Khái niệm Quan trọng
-- **User**: Nhà đầu tư sử dụng hệ thống
-- **Strategy**: Chiến lược giao dịch
-- **Portfolio**: Danh mục đầu tư
-- **Stock**: Cổ phiếu
-- **PriceData**: Dữ liệu giá
-- **FinancialData**: Dữ liệu tài chính
-- **Backtest**: Kết quả backtest
-- **Position**: Vị thế giao dịch
-
 ## 6. Thư viện Quan trọng & Lưu ý Sử dụng
+### Backend
+- FastAPI: Framework API chính
+- vnstock: Thư viện lấy dữ liệu chứng khoán
+- SQLAlchemy: ORM cho database
+- Alembic: Quản lý migrations
+- Poetry: Quản lý dependencies
 
-### 6.1 Backend
-- **FastAPI**: Xây dựng API nhanh, hiệu quả
-- **SQLAlchemy**: ORM mạnh mẽ, hỗ trợ MySQL
-- **JWT**: Quản lý xác thực
-- **backtrader**: Backtesting engine
-
-### 6.2 Frontend
-- **Next.js**: SSR, routing, API routes
-- **MUI**: Component library
-- **Redux Toolkit**: State management
-- **TradingView Charts**: Hiển thị biểu đồ
-- **Plotly.js**: Visualization phức tạp
-
-### 6.3 Data Processing
-- **vnstock**: Lấy dữ liệu thị trường
-- **pandas**: Xử lý dữ liệu
-- **ta-lib**: Phân tích kỹ thuật
-- **scikit-learn**: Machine learning
-- **optuna**: Tối ưu hóa tham số
+### Frontend
+- React Query: State management và data fetching
+- TailwindCSS: Styling
+- React Router: Routing
 
 ## 7. Các Luồng (Flows) Chính
+1. Quản lý Dữ liệu Cổ phiếu
+   - Lấy danh sách cổ phiếu
+   - Lấy dữ liệu giá theo thời gian
+   - Lấy thông tin tài chính
+   - Lấy thông tin sự kiện
 
-### 7.1 Luồng Backtest
-1. Người dùng chọn/tạo chiến lược
-2. Cấu hình tham số backtest
-3. Chạy backtest
-4. Xem kết quả và phân tích
-5. Tối ưu hóa tham số
-6. Lưu chiến lược
+2. Phân tích Cổ phiếu
+   - Sàng lọc cổ phiếu theo tiêu chí
+   - Phân tích kỹ thuật
+   - Phân tích cơ bản
+   - Theo dõi danh mục đầu tư
 
-### 7.2 Luồng Phân tích
-1. Chọn cổ phiếu/cụm cổ phiếu
-2. Chọn chỉ báo/phương pháp phân tích
-3. Xem kết quả phân tích
-4. Xuất báo cáo
-
-### 7.3 Luồng Theo dõi
-1. Tạo danh mục theo dõi
-2. Cấu hình cảnh báo
-3. Nhận thông báo
-4. Phân tích hiệu suất
-
-## 8. Thiết lập Môi trường & Bắt đầu
-
-### 8.1 Yêu cầu Hệ thống
-- Python 3.11+
-- Node.js 18+
-- MySQL 8.0+
-- PHPMyAdmin (tùy chọn)
-
-### 8.2 Cài đặt
+## 8. Thiết lập Môi trường & Bắt đầu (Getting Started)
+### Backend
 ```bash
-# Clone repository
-git clone https://github.com/your-org/stock-platform.git
-cd stock-platform
+# Activate virtual environment
+source venv/bin/activate  # Linux/Mac
+.\venv\Scripts\activate   # Windows
 
-# Backend setup
-python -m venv venv
-source venv/bin/activate  # hoặc .\venv\Scripts\activate trên Windows
-pip install -r requirements.txt
+# Install dependencies
+poetry install
 
-# Frontend setup
-cd frontend
-npm install
-
-# Database setup
-# 1. Tạo database trong MySQL
-# 2. Cập nhật thông tin kết nối trong backend/.env
-# 3. Chạy migrations
-cd ../backend
+# Run migrations
 alembic upgrade head
 
-# Run development servers
-# Terminal 1: Backend
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+# Start development server
+uvicorn app.main:app --reload
+```
 
-# Terminal 2: Frontend
-cd ../frontend
+### Frontend
+```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
 ```
 
-## 9. Liên kết Nhanh
-- [API Documentation](docs/api.md)
-- [Database Schema](docs/database_schema.md)
-- [Testing Guidelines](docs/testing.md)
-- [Deployment Guide](docs/deployment.md)
-- [Contributing Guide](docs/contributing.md) 
+## 9. Liên kết Nhanh (Quick Links)
+- [Database Schema](./database_schema.md)
+- [Tasks](./tasks.md)
+- [API Documentation](./docs/api.md)
+- [Testing Guide](./docs/testing.md)
+- [Coding Conventions](./docs/conventions.md)
